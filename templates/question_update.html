@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>Поточний текст</p>
+<p>{{ opt[1] }}</p>
+
+<form action="/question/update/{{ opt[0] }}/" method="post">
+    {{ form.hidden_tag() }}
+        <p>
+            {{ form.text.label }}<br>
+            {{ form.text(size=32) }}
+            {% for error in form.text.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit(value='Змінити запитання') }}</p>
+</form>
+</body>
+</html>

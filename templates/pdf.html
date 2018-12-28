@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>{{ set_title[0] }}</h1>
+{% for question in question_set %}
+    <p>
+        <h2>{{ question[1] }}</h2>
+    </p>
+    <ul>
+    {% if question[2] %}
+    {% for op_text, op_pk in question[2] %}
+        <li>{{ op_text }}
+        </li>
+    {% endfor %}
+    {% endif %}
+    </ul>
+    <hr>
+{% endfor %}
+</body>
+</html>

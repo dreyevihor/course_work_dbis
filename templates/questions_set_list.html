@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><h1>Ваш список ваших списків запитань:</h1></p>
+{% for question_set in question_set_list %}
+    <p><a href="/question_set/{{ question_set[0] }}">{{ question_set[1] }}</a></p>
+    <p>
+        <a href="/question_set/delete/{{ question_set[0] }}">Видалити</a>
+        <a href="/question_set/update/{{ question_set[0] }}">Змінити</a>
+        <a href="/question_set/pdf/{{ question_set[0] }}">Зберегти до PDF</a>
+    </p>
+    <hr>
+{% endfor %}
+<form action="/question_sets/" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.text.label }}<br>
+            {{ form.text(size=32) }}
+            {% for error in form.text.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</body>
+</html>

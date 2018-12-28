@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for question in question_set %}
+    <p>
+        <h2>{{ question[1] }}</h2>
+        <a href="/question/delete/{{ question[0] }}">Видалити</a>
+        <a href="/question/update/{{ question[0] }}">Змінити</a>
+    </p>
+    <ul>
+    {% if question[2] %}
+    {% for op_text, op_pk in question[2] %}
+        <li>{{ op_text }}  <a href="/option/delete/{{ op_pk }}"> Видалити </a>
+        <a href="/option/update/{{ op_pk }}"> Змінити </a>
+        </li>
+    {% endfor %}
+    {% endif %}
+    <form action="/option/add/{{ pk }}/" method="post">
+    {{ op_form.hidden_tag() }}
+    {{ op_form.question_pk(value=question[0], type='hidden') }}
+    <p>{{ op_form.text(size=32) }}</p>
+    <p>{{ op_form.submit() }}</p>
+    </form>
+    </ul>
+    <hr>
+{% endfor %}
+<form action="" method="post">
+    {{ qu_form.hidden_tag() }}
+    {{ qu_form.set_pk(type='hidden', value=pk) }}
+    {{ qu_form.text(size=200) }}
+    {{ qu_form.submit() }}
+</form>
+</body>
+</html>
